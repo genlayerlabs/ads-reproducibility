@@ -1,0 +1,37 @@
+.venv/
+.pytest_cache/
+.ruff_cache/
+__pycache__/
+*.py[cod]
+.coverage
+htmlcov/
+
+# Credentials and local overrides.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Provider responses and run-local artifacts are immutable but not committed.
+data/runs/
+data/manifests/runtime/
+results/pilot/*/
+results/confirmatory/*/
+
+# Generated publication artifacts are committed only for a deliberate,
+# reviewed release, together with provenance and an explicit claim scope.
+results/paper/*.png
+results/paper/*.pdf
+results/paper/*.tex
+results/paper/*.csv
+results/paper/*.json
+!results/paper/README.md
+!results/paper/failure_policy_sensitivity.csv
+!results/paper/finite_catalogue_coverage.csv
+!results/paper/finite_census_coverage.csv
+!results/paper/finite_census_per_item.csv
+!results/paper/finite_census_security.csv
+!results/paper/population_sensitivity.csv
+
+.DS_Store

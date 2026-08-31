@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genlayerlabs.github.io/ads-study/evaluator-row.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["row_index", "configuration_id", "model", "row_seed", "design_hash"],
+  "properties": {
+    "row_index": {"type": "integer", "minimum": 0},
+    "configuration_id": {"type": "string", "minLength": 1},
+    "model": {"type": "string", "minLength": 1},
+    "row_seed": {"type": "integer", "minimum": 0, "maximum": 2147483647},
+    "design_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

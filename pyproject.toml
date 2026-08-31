@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ads-llm-resolvability-study"
+version = "0.1.0"
+description = "Reproducible real-LLM companion for ADS operational certificates"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "httpx>=0.28,<1",
+  "jsonschema>=4.23,<5",
+  "matplotlib>=3.9,<4",
+  "numpy>=2.1,<3",
+  "pyyaml>=6.0,<7",
+  "scipy>=1.14,<2",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.3,<9",
+  "ruff>=0.9,<1",
+]
+
+[project.scripts]
+ads-study = "ads_llm_study.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ads_llm_study"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 96
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]

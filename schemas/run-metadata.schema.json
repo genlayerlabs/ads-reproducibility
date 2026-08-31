@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genlayerlabs.github.io/ads-study/run-metadata.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "run_id", "phase", "status", "created_at", "updated_at",
+    "base_url", "credential_source", "code_commit", "code_dirty", "provenance", "selected_item_ids",
+    "selected_row_indices", "expected_cells", "full_manifest_design", "router_probe",
+    "completed_cells", "status_counts", "responses_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "run_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"},
+    "phase": {"enum": ["pilot", "confirmatory"]},
+    "status": {"const": "complete"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "base_url": {"type": "string", "pattern": "^https?://.+/v1$"},
+    "credential_source": {"type": "string", "minLength": 1},
+    "code_commit": {"type": ["string", "null"], "pattern": "^[a-f0-9]{40}$"},
+    "code_dirty": {"type": ["boolean", "null"]},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manifest_path", "manifest_sha256", "dataset_sha256",
+        "system_prompt_sha256", "user_template_sha256", "dependency_lock_sha256",
+        "source_manifest_sha256"
+      ],
+      "properties": {
+        "manifest_path": {"type": "string", "minLength": 1},
+        "manifest_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "dataset_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "system_prompt_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "user_template_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "dependency_lock_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "source_manifest_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
+    "selected_item_ids": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "selected_row_indices": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"type": "integer", "minimum": 0}
+    },
+    "design_mode": {
+      "enum": ["iid_full", "iid_subset", "configuration_coverage_smoke"]
+    },
+    "selected_configuration_ids": {
+      "type": "array", "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "expected_cells": {"type": "integer", "minimum": 1},
+    "full_manifest_design": {"type": "boolean"},
+    "router_probe": {"type": "object"},
+    "completed_cells": {"type": "integer", "minimum": 1},
+    "status_counts": {
+      "type": "object",
+      "additionalProperties": {"type": "integer", "minimum": 0}
+    },
+    "responses_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

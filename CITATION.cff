@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this bundle, please cite the associated paper and this release."
+title: "Aggregate Disambiguation Systems: Reproducibility Bundle"
+type: software
+version: 1.0.0
+date-released: 2026-08-31
+authors:
+  - family-names: Lago
+    given-names: "José María"
+  - family-names: Castellana
+    given-names: Albert
+  - family-names: Nemše
+    given-names: Edgars
+repository-code: "https://github.com/genlayerlabs/ads-reproducibility"
+license: MIT

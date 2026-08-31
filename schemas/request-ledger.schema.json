@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genlayerlabs.github.io/ads-study/request-ledger.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id", "cell_id", "item_id", "row_index", "configuration_id",
+    "request_sha256", "payload"
+  ],
+  "properties": {
+    "run_id": {"type": "string", "minLength": 1},
+    "cell_id": {"type": "string", "minLength": 1},
+    "item_id": {"type": "string", "minLength": 1},
+    "row_index": {"type": "integer", "minimum": 0},
+    "configuration_id": {"type": "string", "minLength": 1},
+    "request_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "payload": {"type": "object"}
+  }
+}

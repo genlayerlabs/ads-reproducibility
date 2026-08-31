@@ -1,0 +1,109 @@
+{
+  "cell_accuracy_on_adversarial_clear_items": 0.9977272727272727,
+  "cell_accuracy_on_clear_items": 0.9939189189189189,
+  "cell_false_acceptance_rate": 0.0022727272727272726,
+  "cell_false_rejection_rate": 0.011666666666666667,
+  "cells": 2000,
+  "claim_scope": "pilot_diagnostic_only",
+  "construction_resolvable_items": 37,
+  "construction_resolvable_population_matches": 37,
+  "declared_evaluator_configurations": 21,
+  "equal_configuration_decision_changes": [],
+  "evaluator_rows": 40,
+  "exact_selected_panel_size": 23,
+  "failure_policy_certification_changes": [
+    "bug-03"
+  ],
+  "failure_policy_decision_changes": [
+    "air-03"
+  ],
+  "finite_catalogue_familywise_certified_items": 45,
+  "finite_catalogue_familywise_confidence": 0.975,
+  "finite_catalogue_familywise_declared_weight_lower_coverage": 0.8775000000000001,
+  "finite_catalogue_familywise_uniform_lower_coverage": 0.9,
+  "finite_catalogue_mass_declared_weight_lower_coverage": 0.8425,
+  "finite_catalogue_panel_size": 47,
+  "finite_census_items_stable_by_k7": 47,
+  "finite_census_items_total": 50,
+  "finite_census_late_stable_items": [
+    {
+      "id": "mkt-03",
+      "stable_panel_size": 26
+    },
+    {
+      "id": "ins-03",
+      "stable_panel_size": 34
+    },
+    {
+      "id": "air-03",
+      "stable_panel_size": 39
+    }
+  ],
+  "hoeffding_selected_panel_size": 47,
+  "interpretation": "Pilot diagnostics only; construction labels and stratified seed catalogue do not support a confirmatory population claim.",
+  "items": 50,
+  "leave_one_configuration_decision_changes": [
+    "air-03"
+  ],
+  "mass_interval_threshold_crossing_items": [
+    "mkt-03",
+    "ins-03",
+    "air-03"
+  ],
+  "mean_entropy_on_clear_items": 0.041025631985676554,
+  "mean_entropy_on_unresolvable_items": 0.33332382503894886,
+  "mean_latency_ms": 8532.385029,
+  "phase": "pilot",
+  "policy_fingerprints_observed": [
+    "887242138-1382858753"
+  ],
+  "population_accuracy_on_adversarial_clear_items": 1.0,
+  "population_false_acceptance_rate": 0.0,
+  "population_false_rejection_rate": 0.0,
+  "population_label_accuracy_on_clear_items": 1.0,
+  "providers_observed": [
+    "openai_codex",
+    "openrouter",
+    "openrouter_market"
+  ],
+  "realized_evaluator_configurations": 18,
+  "run_id": "pilot-21f-final-20260803-01",
+  "schema_version": 1,
+  "selected_hoeffding_mass_controlled_lower_bound": 0.6134994890451464,
+  "selected_mass_controlled_lower_bound": 0.6911984505098117,
+  "selected_panel_size": 47,
+  "selected_uniform_certified_fraction": 0.92,
+  "sensitivity_interpretation": "Configuration reweighting and failure-policy variants are descriptive; the released matrix was not sampled to certify alternative evaluator laws.",
+  "served_models_observed": [
+    "anthropic/claude-opus-4.8",
+    "anthropic/claude-opus-5",
+    "deepseek/deepseek-v4-flash",
+    "deepseek/deepseek-v4-pro",
+    "google/gemini-3-flash-preview",
+    "google/gemini-3.1-pro-preview",
+    "gpt-5.5",
+    "inception/mercury-2",
+    "moonshotai/kimi-k2.6",
+    "moonshotai/kimi-k3",
+    "openai/gpt-5.6-terra",
+    "qwen/qwen3.6-plus",
+    "qwen/qwen3.7-max",
+    "qwen/qwen3.7-plus",
+    "x-ai/grok-4.5",
+    "z-ai/glm-4.6",
+    "z-ai/glm-5.1",
+    "z-ai/glm-5.2"
+  ],
+  "status_counts": {
+    "malformed_mapped_reject": 15,
+    "success": 1983,
+    "transport_error_mapped_reject": 2
+  },
+  "successful_response_fraction": 0.9915,
+  "target_certified": true,
+  "target_coverage": 0.6,
+  "total_cost_usd_reported": 3.541214,
+  "unresolvable_certified_at_selected_panel": 9,
+  "unresolvable_items": 13,
+  "unresolvable_minus_clear_mean_entropy": 0.2922981930532723
+}

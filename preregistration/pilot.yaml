@@ -1,0 +1,196 @@
+schema_version: 1
+study_id: ads-equivalence-principles
+phase: pilot
+status: mutable_pilot
+description: >-
+  Pilot of frozen equivalence-principle decisions. Results select prompts,
+  evaluator rows, sample sizes, and failure rules; they are not confirmatory.
+
+dataset:
+  path: configs/problems/equivalence-principles-dataset.jsonl
+  sha256: fe5c11531def6849c439dc60919361b60141fee26fc427eeaf5159a0e1b2ea66
+  population_mode: stratified_seed_catalogue
+  item_count: 50
+  labels: construction_labels_for_pilot
+  human_relabel_required_for_confirmatory: true
+
+prompt:
+  system_path: configs/prompts/evaluator-system.txt
+  template_path: configs/prompts/evaluator-user.txt
+  version: pilot-v3
+  exposed_item_fields:
+    - use_case
+    - decision_question
+    - equivalence_principle
+    - evidence
+  forbidden_item_fields:
+    - family
+    - family_weight
+    - clarity_stratum
+    - gold_label
+    - defensible_labels
+    - ambiguity_axis
+    - notes
+
+evaluator_population:
+  sampling: iid_categorical_rows
+  row_count: 40
+  row_seed: 20260803
+  configurations:
+    # Frozen live-eligible catalogue: 21 routes at weight 1/21 each.
+    - id: gpt-5.5
+      model: family:gpt-5.5
+      weight: 0.047619047619047616
+    - id: gpt-5.6-luna
+      model: family:gpt-5.6-luna
+      weight: 0.047619047619047616
+    - id: gpt-5.6-terra
+      model: family:gpt-5.6-terra
+      weight: 0.047619047619047616
+    - id: claude-opus-4-8
+      model: family:claude-opus-4-8
+      weight: 0.047619047619047616
+    - id: claude-opus-5
+      model: family:claude-opus-5
+      weight: 0.047619047619047616
+    - id: claude-sonnet-4-6
+      model: family:claude-sonnet-4-6
+      weight: 0.047619047619047616
+    - id: gemini-3-flash-preview
+      model: family:gemini-3-flash-preview
+      weight: 0.047619047619047616
+    - id: gemini-3.1-pro-preview
+      model: family:gemini-3.1-pro-preview
+      weight: 0.047619047619047616
+    - id: grok-4.5
+      model: family:grok-4.5
+      weight: 0.047619047619047616
+    - id: kimi-k2.6
+      model: family:kimi-k2.6
+      weight: 0.047619047619047616
+    - id: kimi-k3
+      model: family:kimi-k3
+      weight: 0.047619047619047616
+    - id: qwen3.6-plus
+      model: family:qwen3.6-plus
+      weight: 0.047619047619047616
+    - id: qwen3.7-max
+      model: family:qwen3.7-max
+      weight: 0.047619047619047616
+    - id: qwen3.7-plus
+      model: family:qwen3.7-plus
+      weight: 0.047619047619047616
+    - id: glm-4.6
+      model: family:glm-4.6
+      weight: 0.047619047619047616
+    - id: glm-5.1
+      model: family:glm-5.1
+      weight: 0.047619047619047616
+    - id: glm-5.2
+      model: family:glm-5.2
+      weight: 0.047619047619047616
+    - id: deepseek-v4-flash
+      model: family:deepseek-v4-flash
+      weight: 0.047619047619047616
+    - id: deepseek-v4-pro
+      model: family:deepseek-v4-pro
+      weight: 0.047619047619047616
+    - id: muse-spark-1.1
+      model: family:muse-spark-1.1
+      weight: 0.047619047619047616
+    - id: mercury-2
+      model: family:mercury-2
+      weight: 0.047619047619047616
+
+design_contract:
+  workload_unit: >-
+    One pre-frozen equivalence-principle decision record containing the rule and
+    self-contained evidence; no generation call occurs in this diagnostic pilot.
+  generator_sampling_statement: >-
+    The 50 records are a stratified seed catalogue supplied before evaluator calls,
+    not iid draws from an identified workload-generator population.
+  evaluator_eligibility: >-
+    Every sampled evaluator row must resolve one of the twenty-one declared family routes
+    through the authenticated router catalogue and receive the identical frozen item.
+  self_evaluation_policy: not_applicable
+  evaluator_blinding: >-
+    Evaluators receive only the four exposed prompt fields; family, design stratum,
+    construction label, defensible labels, ambiguity axis, and notes are withheld.
+  duplicate_configuration_policy: >-
+    Evaluator configurations are sampled iid with replacement; repeated families are
+    retained as independent rows with distinct deterministic row and cell seeds. Live
+    calls are serialized within family while up to three different families run globally.
+  power_analysis_reference: >-
+    Pilot diagnostics and the Part 1 Monte Carlo implementation; no confirmatory power
+    claim is made from A=50 and M=40.
+  start_condition: >-
+    Offline validation passes, an active budgeted consumer key passes the authenticated
+    catalogue probe, and all twenty-one family routes are present.
+  end_condition: >-
+    All 2000 cells are recorded under the frozen request hashes, or the run is explicitly
+    aborted on a fatal authentication, configuration, route, or policy-contract error.
+  version_drift_policy: record_for_pilot
+  external_truth_source: >-
+    Pilot construction labels and rationale in the supplied dataset; independent human
+    adjudication is required before confirmatory semantic-accuracy claims.
+  sensitivity_analyses:
+    - uniform workload-item weights
+    - declared family-mixture weights
+    - fixed Byzantine share attack model
+    - targeted census-contamination attack model
+  exclusion_policy: >-
+    No observed cell is excluded post hoc; malformed, missing, timeout, and exhausted
+    retryable failures map to REJECT, while fatal setup errors abort the run.
+
+request:
+  temperature: 0.2
+  top_p: 1.0
+  max_tokens: 4096
+  response_format: json_object
+  timeout_seconds: 90
+  concurrency: 3
+  max_concurrency_per_configuration: 1
+  inter_call_delay_seconds: 0.0
+  max_transport_attempts: 3
+  retry_backoff_seconds: 1.0
+  retry_statuses: [408, 429, 500, 502, 503, 504]
+  malformed_policy: reject
+  missing_policy: reject
+  seed_derivation: sha256_row_seed_and_item_id
+
+router:
+  base_url: https://router.ygr.ai/v1
+  api_key_env: LLM_API_KEY
+  api_key_env_aliases: [UNHARDCODED_API_KEY]
+  local_development_fallback:
+    path: ../llm-policy-host/.env
+    variable: MY_DEV_KEY
+  require_routing_trace: true
+  store_decision_trace: true
+  required_trace_fields: [provider, model_family, served_model_id, policy_fingerprint, decision_trace]
+  expected_policy_fingerprint: null
+  allowed_providers: []
+  provider_drift_policy: record_for_pilot
+
+analysis:
+  threshold: 0.5
+  inclusive_acceptance: true
+  candidate_panel_sizes: [5, 7, 11, 13, 23, 25, 47, 49, 95, 97, 191, 193, 383, 385, 767, 769, 1535, 1537]
+  delta: 0.01
+  beta: 0.40
+  eta_e: 0.025
+  eta_g: 0.025
+  xi_e: 0.05
+  selection_rule: smallest_passing_panel
+  primary_certificate: mass_controlled
+  external_accuracy_labels: [accept, reject]
+  report_uniform_item_weights: true
+  report_declared_family_weights: true
+  adversarial_fractions: [0.0, 0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40]
+
+execution:
+  full_matrix_required: true
+  resume_completed_cells: true
+  raw_outputs_committed: false
+  preregistration_hash_required: false
+  pilot_calls_expected: 2000

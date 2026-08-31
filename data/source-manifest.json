@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "imported_at": "2026-08-03",
+  "source_description": "User-supplied equivalence-principles pilot seed set",
+  "files": [
+    {
+      "path": "configs/problems/equivalence-principles-README.md",
+      "sha256": "f97a2328f2f05ea7aabfcd0b1e5c915c6172a1aeb4b2d464b288997990730c10"
+    },
+    {
+      "path": "configs/problems/equivalence-principles-dataset.jsonl",
+      "sha256": "fe5c11531def6849c439dc60919361b60141fee26fc427eeaf5159a0e1b2ea66"
+    }
+  ]
+}

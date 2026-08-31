@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genlayerlabs.github.io/ads-study/response-record.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "run_id", "cell_id", "item_id", "row_index",
+    "configuration_id", "requested_model", "row_seed", "cell_seed",
+    "request_sha256", "status", "attempts", "started_at", "finished_at",
+    "latency_ms", "raw_text", "parsed_verdict", "parsed_confidence",
+    "parsed_reason", "global_vote", "routing", "usage", "error"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "cell_id": {"type": "string", "minLength": 1},
+    "item_id": {"type": "string", "minLength": 1},
+    "row_index": {"type": "integer", "minimum": 0},
+    "configuration_id": {"type": "string", "minLength": 1},
+    "requested_model": {"type": "string", "minLength": 1},
+    "row_seed": {"type": "integer", "minimum": 0},
+    "cell_seed": {"type": "integer", "minimum": 0},
+    "request_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "status": {"enum": ["success", "malformed_mapped_reject", "missing_mapped_reject", "routing_trace_missing_mapped_reject", "transport_error_mapped_reject"]},
+    "attempts": {"type": "integer", "minimum": 1},
+    "started_at": {"type": "string", "format": "date-time"},
+    "finished_at": {"type": "string", "format": "date-time"},
+    "latency_ms": {"type": "number", "minimum": 0},
+    "finish_reason": {"type": ["string", "null"]},
+    "raw_text": {"type": ["string", "null"]},
+    "parsed_verdict": {"type": ["string", "null"], "enum": ["ACCEPT", "REJECT", null]},
+    "parsed_confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+    "parsed_reason": {"type": ["string", "null"]},
+    "global_vote": {"type": "integer", "enum": [0, 1]},
+    "routing": {"type": "object"},
+    "usage": {"type": "object"},
+    "error": {"type": ["object", "null"]}
+  }
+}

@@ -1,0 +1,91 @@
+schema_version: 1
+study_id: REPLACE_ME
+phase: confirmatory
+status: frozen
+description: REPLACE_ME
+
+dataset:
+  path: REPLACE_ME
+  sha256: REPLACE_ME
+  population_mode: iid_workload_generator
+  item_count: REPLACE_ME
+  labels: independently_adjudicated
+  human_relabel_required_for_confirmatory: false
+
+prompt:
+  system_path: REPLACE_ME
+  template_path: REPLACE_ME
+  version: REPLACE_ME
+  exposed_item_fields: [use_case, decision_question, equivalence_principle, evidence]
+  forbidden_item_fields: [family, family_weight, clarity_stratum, gold_label, defensible_labels, ambiguity_axis, notes]
+
+evaluator_population:
+  sampling: iid_categorical_rows
+  row_count: REPLACE_ME
+  row_seed: REPLACE_ME
+  configurations: REPLACE_ME
+
+design_contract:
+  workload_unit: REPLACE_ME
+  generator_sampling_statement: REPLACE_ME
+  evaluator_eligibility: REPLACE_ME
+  self_evaluation_policy: disjoint_roles
+  evaluator_blinding: REPLACE_ME
+  duplicate_configuration_policy: REPLACE_ME
+  power_analysis_reference: REPLACE_ME
+  start_condition: REPLACE_ME
+  end_condition: REPLACE_ME
+  version_drift_policy: abort_and_restart_with_new_preregistration
+  external_truth_source: REPLACE_ME
+  sensitivity_analyses: [REPLACE_ME]
+  exclusion_policy: REPLACE_ME
+
+request:
+  temperature: REPLACE_ME
+  top_p: REPLACE_ME
+  max_tokens: REPLACE_ME
+  response_format: json_object
+  timeout_seconds: REPLACE_ME
+  concurrency: REPLACE_ME
+  max_concurrency_per_configuration: REPLACE_ME
+  inter_call_delay_seconds: REPLACE_ME
+  max_transport_attempts: REPLACE_ME
+  retry_backoff_seconds: REPLACE_ME
+  retry_statuses: [408, 429, 500, 502, 503, 504]
+  malformed_policy: reject
+  missing_policy: reject
+  seed_derivation: sha256_row_seed_and_item_id
+
+router:
+  base_url: https://router.ygr.ai/v1
+  api_key_env: LLM_API_KEY
+  api_key_env_aliases: [UNHARDCODED_API_KEY]
+  require_routing_trace: true
+  store_decision_trace: true
+  required_trace_fields: [provider, model_family, served_model_id, policy_fingerprint, decision_trace]
+  expected_policy_fingerprint: REPLACE_ME
+  allowed_providers: REPLACE_ME
+  provider_drift_policy: abort_on_mismatch
+
+analysis:
+  threshold: 0.5
+  inclusive_acceptance: true
+  candidate_panel_sizes: REPLACE_ME
+  delta: REPLACE_ME
+  beta: REPLACE_ME
+  eta_e: REPLACE_ME
+  eta_g: REPLACE_ME
+  xi_e: REPLACE_ME
+  selection_rule: smallest_passing_panel
+  primary_certificate: mass_controlled
+  external_accuracy_labels: [accept, reject]
+  report_uniform_item_weights: true
+  report_declared_family_weights: true
+  adversarial_fractions: REPLACE_ME
+
+execution:
+  full_matrix_required: true
+  resume_completed_cells: true
+  raw_outputs_committed: false
+  preregistration_hash_required: true
+  pilot_calls_expected: 0

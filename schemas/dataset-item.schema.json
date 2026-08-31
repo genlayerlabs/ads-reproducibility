@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genlayerlabs.github.io/ads-study/dataset-item.schema.json",
+  "title": "Equivalence-principle workload item",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id", "family", "family_weight", "use_case", "clarity_stratum",
+    "decision_question", "equivalence_principle", "evidence", "gold_label",
+    "defensible_labels", "ambiguity_axis", "notes"
+  ],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9]+-[0-9]{2}$"},
+    "family": {"type": "string", "pattern": "^[a-z][a-z0-9_]+$"},
+    "family_weight": {"type": "number", "exclusiveMinimum": 0, "maximum": 1},
+    "use_case": {"type": "string", "minLength": 1},
+    "clarity_stratum": {
+      "enum": ["clear_accept", "clear_reject", "ambiguous_benign", "ambiguous_adversarial"]
+    },
+    "decision_question": {"type": "string", "minLength": 1},
+    "equivalence_principle": {"type": "string", "pattern": "^ACCEPT"},
+    "evidence": {"type": "string", "minLength": 1},
+    "gold_label": {"enum": ["accept", "reject", "unresolvable"]},
+    "defensible_labels": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"enum": ["accept", "reject"]}
+    },
+    "ambiguity_axis": {"type": ["string", "null"]},
+    "notes": {"type": "string", "minLength": 1}
+  }
+}
